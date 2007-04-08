@@ -27,8 +27,8 @@
 %endif
 %endif
 #
-Summary:	Linux Drivers for nVidia TNT/TNT2/GeForce/Quadro Chips
-Summary(pl.UTF-8):	Sterowniki do kart graficznych nVidia TNT/TNT2/GeForce/Quadro
+Summary:	Linux Drivers for older nVidia GeForce/Quadro Chips
+Summary(pl.UTF-8):	Sterowniki do starszych kart graficznych nVidia GeForce/Quadro
 Name:		xorg-driver-video-legacy2
 Version:	%{_nv_ver}.%{_nv_rel}
 Release:	%{_rel}
@@ -79,10 +79,7 @@ This driver set adds improved 2D functionality to the Xorg/XFree86 X
 server as well as high performance OpenGL acceleration, AGP support,
 support for most flat panels, and 2D multiple monitor support.
 
-This driver works with nVidia graphics which requres never drivers
-than legacy but doesn't work with fresh ones.
-
-Supported card are: 
+This driver version supports the following nVidia adapters: 
 GeForce 6100/6150/6150LE/6200/6200TurboCache(TM)/6500/6600/6600GT/6600LE/6600VE/6610XL/6800/6800GS/6800GT/6800LE/6800Ultra/6800XE/6800XT/7300GS/7300LE/7600GS/7600GT/7800GS/7800GT/7800GTX/7900GT/7900GTX
 GeForce FX 5100/5200/5200LE/5500/5600/5600XT/5700/5700LE/5700VE/5800/5900/5900XT/5900ZT/5950/Go5100/Go5200/Go5250/Go53xx/Go5600/Go5650/Go5700
 GeForce Go 6200/6400/6600/6800/7300/7400/7600/7800/7900 
@@ -94,16 +91,16 @@ Quadro DCC
 Quadro FX 1000/1100/1300/1400/1500/1500M/2000/2500M/3000/330/3400/4400/3450/350/3500/350M/4000/4500/500/600/540/550/5500/560/700/Go1000/Go1400/Go700
 Quadro NVS 110M/120M/280/285/440/50 Quadro NVSA Quadro2 MXR/EX/Go
 Quadro4 380XGL/500GoGL/550XGL/580XGL/700GoGL/700XGL/750XGL/780XGL/900XGL/980XGL
+
+Older TNT/GeForce/Quadro adapters are supported by driver from
+xorg-driver-video-nvidia-legacy package, not this one.
 
 %description -l pl.UTF-8
 Usprawnione sterowniki dla kart graficznych nVidia do serwera
 Xorg/XFree86, dające wysokowydajną akcelerację OpenGL, obsługę AGP i
 wielu monitorów 2D.
 
-Sterowniki obsługują karty, które wymagają sterowników nowszych niż w
-pakiecie legacy, a nie są obsługiwane przez najnowsze sterowniki.
-
-Obsługują karty nVidia: 
+Ta wersja sterowników obsługuje następujące karty nVidia: 
 GeForce 6100/6150/6150LE/6200/6200TurboCache(TM)/6500/6600/6600GT/6600LE/6600VE/6610XL/6800/6800GS/6800GT/6800LE/6800Ultra/6800XE/6800XT/7300GS/7300LE/7600GS/7600GT/7800GS/7800GT/7800GTX/7900GT/7900GTX
 GeForce FX 5100/5200/5200LE/5500/5600/5600XT/5700/5700LE/5700VE/5800/5900/5900XT/5900ZT/5950/Go5100/Go5200/Go5250/Go53xx/Go5600/Go5650/Go5700
 GeForce Go 6200/6400/6600/6800/7300/7400/7600/7800/7900 
@@ -116,8 +113,8 @@ Quadro FX 1000/1100/1300/1400/1500/1500M/2000/2500M/3000/330/3400/4400/3450/350/
 Quadro NVS 110M/120M/280/285/440/50 Quadro NVSA Quadro2 MXR/EX/Go
 Quadro4 380XGL/500GoGL/550XGL/580XGL/700GoGL/700XGL/750XGL/780XGL/900XGL/980XGL
 
-Karty nVidia NV1 i Riva 128/128ZX są obsługiwane przez sterownik nv z
-pakietów Xorg/XFree8 - NIE są obsługiwane przez ten pakiet.
+Starsze karty TNT/GeForce/Quadro są obsługiwane przez sterownik z
+pakietu xorg-driver-video-nvidia-legacy.
 
 %package devel
 Summary:	OpenGL for X11R6 development (only gl?.h)
