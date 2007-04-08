@@ -28,7 +28,7 @@
 %endif
 #
 Summary:	Linux Drivers for nVidia TNT/TNT2/GeForce/Quadro Chips
-Summary(pl):	Sterowniki do kart graficznych nVidia TNT/TNT2/GeForce/Quadro
+Summary(pl.UTF-8):	Sterowniki do kart graficznych nVidia TNT/TNT2/GeForce/Quadro
 Name:		xorg-driver-video-legacy2
 Version:	%{_nv_ver}.%{_nv_rel}
 Release:	%{_rel}
@@ -95,15 +95,15 @@ Quadro FX 1000/1100/1300/1400/1500/1500M/2000/2500M/3000/330/3400/4400/3450/350/
 Quadro NVS 110M/120M/280/285/440/50 Quadro NVSA Quadro2 MXR/EX/Go
 Quadro4 380XGL/500GoGL/550XGL/580XGL/700GoGL/700XGL/750XGL/780XGL/900XGL/980XGL
 
-%description -l pl
+%description -l pl.UTF-8
 Usprawnione sterowniki dla kart graficznych nVidia do serwera
-Xorg/XFree86, daj±ce wysokowydajn± akceleracjê OpenGL, obs³ugê AGP i
-wielu monitorów 2D.
+Xorg/XFree86, dajÄ…ce wysokowydajnÄ… akceleracjÄ™ OpenGL, obsÅ‚ugÄ™ AGP i
+wielu monitorÃ³w 2D.
 
-Sterowniki obs³uguj± karty, które wymagaj± sterowników nowszych ni¿ w
-pakiecie legacy, a nie s± obs³ugiwane przez najnowsze sterowniki.
+Sterowniki obsÅ‚ugujÄ… karty, ktÃ³re wymagajÄ… sterownikÃ³w nowszych niÅ¼ w
+pakiecie legacy, a nie sÄ… obsÅ‚ugiwane przez najnowsze sterowniki.
 
-Obs³uguj± karty nVidia: 
+ObsÅ‚ugujÄ… karty nVidia: 
 GeForce 6100/6150/6150LE/6200/6200TurboCache(TM)/6500/6600/6600GT/6600LE/6600VE/6610XL/6800/6800GS/6800GT/6800LE/6800Ultra/6800XE/6800XT/7300GS/7300LE/7600GS/7600GT/7800GS/7800GT/7800GTX/7900GT/7900GTX
 GeForce FX 5100/5200/5200LE/5500/5600/5600XT/5700/5700LE/5700VE/5800/5900/5900XT/5900ZT/5950/Go5100/Go5200/Go5250/Go53xx/Go5600/Go5650/Go5700
 GeForce Go 6200/6400/6600/6800/7300/7400/7600/7800/7900 
@@ -116,12 +116,12 @@ Quadro FX 1000/1100/1300/1400/1500/1500M/2000/2500M/3000/330/3400/4400/3450/350/
 Quadro NVS 110M/120M/280/285/440/50 Quadro NVSA Quadro2 MXR/EX/Go
 Quadro4 380XGL/500GoGL/550XGL/580XGL/700GoGL/700XGL/750XGL/780XGL/900XGL/980XGL
 
-Karty nVidia NV1 i Riva 128/128ZX s± obs³ugiwane przez sterownik nv z
-pakietów Xorg/XFree8 - NIE s± obs³ugiwane przez ten pakiet.
+Karty nVidia NV1 i Riva 128/128ZX sÄ… obsÅ‚ugiwane przez sterownik nv z
+pakietÃ³w Xorg/XFree8 - NIE sÄ… obsÅ‚ugiwane przez ten pakiet.
 
 %package devel
 Summary:	OpenGL for X11R6 development (only gl?.h)
-Summary(pl):	Pliki nag³ówkowe OpenGL dla systemu X11R6 (tylko gl?.h)
+Summary(pl.UTF-8):	Pliki nagÅ‚Ã³wkowe OpenGL dla systemu X11R6 (tylko gl?.h)
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Provides:	OpenGL-GLX-devel
@@ -134,13 +134,13 @@ Conflicts:	XFree86-OpenGL-devel < 4.3.99.902-0.3
 %description devel
 Base headers (only gl?.h) for OpenGL for X11R6 for nvidia drivers.
 
-%description devel -l pl
-Podstawowe pliki nag³ówkowe (tylko gl?.h) OpenGL dla systemu X11R6 dla
-sterowników nvidii.
+%description devel -l pl.UTF-8
+Podstawowe pliki nagÅ‚Ã³wkowe (tylko gl?.h) OpenGL dla systemu X11R6 dla
+sterownikÃ³w nvidii.
 
 %package progs
 Summary:	Tools for advanced control of nVidia graphic cards
-Summary(pl):	Narzêdzia do zarz±dzania kartami graficznymi nVidia
+Summary(pl.UTF-8):	NarzÄ™dzia do zarzÄ…dzania kartami graficznymi nVidia
 Group:		Applications/System
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	XFree86-driver-nvidia-progs
@@ -148,13 +148,13 @@ Obsoletes:	XFree86-driver-nvidia-progs
 %description progs
 Tools for advanced control of nVidia graphic cards.
 
-%description progs -l pl
-Narzêdzia do zarz±dzania kartami graficznymi nVidia.
+%description progs -l pl.UTF-8
+NarzÄ™dzia do zarzÄ…dzania kartami graficznymi nVidia.
 
 %package -n kernel%{_alt_kernel}-video-nvidia
 Summary:	nVidia kernel module for nVidia Architecture support
-Summary(de):	Das nVidia-Kern-Modul für die nVidia-Architektur-Unterstützung
-Summary(pl):	Modu³ j±dra dla obs³ugi kart graficznych nVidia
+Summary(de.UTF-8):	Das nVidia-Kern-Modul fÃ¼r die nVidia-Architektur-UnterstÃ¼tzung
+Summary(pl.UTF-8):	ModuÅ‚ jÄ…dra dla obsÅ‚ugi kart graficznych nVidia
 Version:	%{_nv_ver}.%{_nv_rel}
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
@@ -167,11 +167,11 @@ Obsoletes:	XFree86-nvidia-kernel
 %description -n kernel%{_alt_kernel}-video-nvidia
 nVidia Architecture support for Linux kernel.
 
-%description -n kernel%{_alt_kernel}-video-nvidia -l de
-Die nVidia-Architektur-Unterstützung für den Linux-Kern.
+%description -n kernel%{_alt_kernel}-video-nvidia -l de.UTF-8
+Die nVidia-Architektur-UnterstÃ¼tzung fÃ¼r den Linux-Kern.
 
-%description -n kernel%{_alt_kernel}-video-nvidia -l pl
-Obs³uga architektury nVidia dla j±dra Linuksa. Pakiet wymagany przez
+%description -n kernel%{_alt_kernel}-video-nvidia -l pl.UTF-8
+ObsÅ‚uga architektury nVidia dla jÄ…dra Linuksa. Pakiet wymagany przez
 sterownik nVidii dla Xorg/XFree86.
 
 %prep
