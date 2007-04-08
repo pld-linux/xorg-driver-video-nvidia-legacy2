@@ -45,27 +45,22 @@ Source1:	http://download.nvidia.com/XFree86/Linux-x86_64/%{_nv_ver}-%{_nv_rel}/N
 Patch0:		X11-driver-nvidia-GL.patch
 Patch1:		X11-driver-nvidia-desktop.patch
 URL:		http://www.nvidia.com/object/linux.html
+BuildRequires:	%{kgcc_package}
 %if %{with kernel}
 %{?with_dist_kernel:BuildRequires:	kernel%{_alt_kernel}-module-build >= 3:2.6.7}
 %endif
-BuildRequires:	%{kgcc_package}
 BuildRequires:	rpmbuild(macros) >= 1.379
-BuildRequires:	sed >= 4.0
 BuildConflicts:	XFree86-nvidia
 Requires:	xorg-xserver-server
-Provides:	OpenGL = 1.4
+Provides:	OpenGL = 1.5
 Provides:	OpenGL-GLX
-Provides:	X11-OpenGL-core
-Provides:	X11-OpenGL-libGL
-Provides:	XFree86-OpenGL-core
-Provides:	XFree86-OpenGL-libGL
-Provides:	xorg-xserver-modules-libglx
+Provides:	xorg-xserver-libglx
 Obsoletes:	Mesa
 Obsoletes:	Mesa-libGL
-Obsoletes:	X11-OpenGL-core
-Obsoletes:	X11-OpenGL-libGL
-Obsoletes:	XFree86-OpenGL-core
-Obsoletes:	XFree86-OpenGL-libGL
+Obsoletes:	X11-OpenGL-core < 1:7.0.0
+Obsoletes:	X11-OpenGL-libGL < 1:7.0.0
+Obsoletes:	XFree86-OpenGL-core < 1:7.0.0
+Obsoletes:	XFree86-OpenGL-libGL < 1:7.0.0
 Obsoletes:	XFree86-driver-nvidia
 Obsoletes:	XFree86-nvidia
 Conflicts:	XFree86-OpenGL-devel <= 4.2.0-3
