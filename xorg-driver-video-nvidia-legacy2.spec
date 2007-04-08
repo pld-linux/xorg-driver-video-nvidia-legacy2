@@ -1,7 +1,6 @@
 #
 # Conditional build:
 %bcond_without	dist_kernel	# without distribution kernel
-%bcond_without	smp		# without smp packages
 %bcond_without	kernel		# without kernel packages
 %bcond_without	incall		# include all tarballs
 %bcond_without	userspace	# don't build userspace programs
@@ -43,9 +42,6 @@ Source0:	http://download.nvidia.com/XFree86/Linux-x86/%{_nv_ver}-%{_nv_rel}/NVID
 Source1:	http://download.nvidia.com/XFree86/Linux-x86_64/%{_nv_ver}-%{_nv_rel}/NVIDIA-Linux-x86_64-%{_nv_ver}-%{_nv_rel}-pkg2.run
 # Source1-md5:	64b88c6f405e7f2dd1607c0062c0c1f3
 %endif
-Source2:        X11-driver-nvidia-settings.desktop
-Source3:        X11-driver-nvidia-xinitrc.sh
-
 Patch0:		X11-driver-nvidia-GL.patch
 Patch1:		X11-driver-nvidia-desktop.patch
 URL:		http://www.nvidia.com/object/linux.html
@@ -53,7 +49,7 @@ URL:		http://www.nvidia.com/object/linux.html
 %{?with_dist_kernel:BuildRequires:	kernel%{_alt_kernel}-module-build >= 3:2.6.7}
 %endif
 BuildRequires:	%{kgcc_package}
-BuildRequires:	rpmbuild(macros) >= 1.308
+BuildRequires:	rpmbuild(macros) >= 1.379
 BuildRequires:	sed >= 4.0
 BuildConflicts:	XFree86-nvidia
 Requires:	xorg-xserver-server
@@ -140,7 +136,7 @@ Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 Requires(post,postun):	/sbin/depmod
 Requires:	dev >= 2.7.7-10
-%{?with_dist_kernel:%requires_releq_kernel_up}
+%{?with_dist_kernel:%requires_releq_kernel}
 Provides:	X11-driver-nvidia(kernel)
 Obsoletes:	XFree86-nvidia-kernel
 
@@ -153,28 +149,6 @@ Die nVidia-Architektur-Unterstützung für den Linux-Kern.
 %description -n kernel%{_alt_kernel}-video-nvidia -l pl
 Obs³uga architektury nVidia dla j±dra Linuksa. Pakiet wymagany przez
 sterownik nVidii dla Xorg/XFree86.
-
-%package -n kernel%{_alt_kernel}-smp-video-nvidia
-Summary:	nVidia kernel module for nVidia Architecture support
-Summary(de):	Das nVidia-Kern-Modul für die nVidia-Architektur-Unterstützung
-Summary(pl):	Modu³ j±dra dla obs³ugi kart graficznych nVidia
-Release:	%{_rel}@%{_kernel_ver_str}
-Group:		Base/Kernel
-Requires(post,postun):	/sbin/depmod
-Requires:	dev >= 2.7.7-10
-%{?with_dist_kernel:%requires_releq_kernel_smp}
-Provides:	X11-driver-nvidia(kernel)
-Obsoletes:	XFree86-nvidia-kernel
-
-%description -n kernel%{_alt_kernel}-smp-video-nvidia
-nVidia Architecture support for Linux kernel SMP.
-
-%description -n kernel%{_alt_kernel}-smp-video-nvidia -l de
-Die nVidia-Architektur-Unterstützung für den Linux-Kern SMP.
-
-%description -n kernel%{_alt_kernel}-smp-video-nvidia -l pl
-Obs³uga architektury nVidia dla j±dra Linuksa SMP. Pakiet wymagany
-przez sterownik nVidii dla Xorg/XFree86.
 
 %prep
 cd %{_builddir}
@@ -194,35 +168,13 @@ echo 'EXTRA_CFLAGS += -Wno-pointer-arith -Wno-sign-compare -Wno-unused' >> usr/s
 %if %{with kernel}
 cd usr/src/nv/
 ln -sf Makefile.kbuild Makefile
-for cfg in %{?with_dist_kernel:%{?with_smp:smp} up}%{!?with_dist_kernel:nondist}; do
-        if [ ! -r "%{_kernelsrcdir}/config-$cfg" ]; then
-                exit 1
-        fi
-        rm -rf o
-        install -d o/include/linux
-        ln -sf %{_kernelsrcdir}/config-$cfg o/.config
-        ln -sf %{_kernelsrcdir}/Module.symvers-$cfg o/Module.symvers
-        ln -sf %{_kernelsrcdir}/include/linux/autoconf-$cfg.h o/include/linux/autoconf.h
-%if %{with dist_kernel}
-        %{__make} -j1 -C %{_kernelsrcdir} O=$PWD/o prepare scripts
-%else
-        touch o/include/config/MARKER
-        ln -sf %{_kernelsrcdir}/scripts o/scripts
-%endif
-        %{__make} -C %{_kernelsrcdir} clean \
-                RCS_FIND_IGNORE="-name '*.ko' -o -name nv-kernel.o -o" \
-                SYSSRC=%{_kernelsrcdir} \
-                SYSOUT=$PWD/o \
-                M=$PWD O=$PWD/o \
-                %{?with_verbose:V=1}
-        %{__make} -C %{_kernelsrcdir} modules \
-                CC="%{__cc}" CPP="%{__cpp}" \
-                SYSSRC=%{_kernelsrcdir} \
-                SYSOUT=$PWD/o \
-                M=$PWD O=$PWD/o \
-                %{?with_verbose:V=1}
-        mv nvidia.ko nvidia-$cfg.ko
-done
+cat >> Makefile <<'EOF'
+
+$(obj)/nv-kernel.o: $(src)/nv-kernel.o.bin
+	cp $< $@
+EOF
+mv nv-kernel.o{,.bin}
+%build_kernel_modules -m nvidia
 %endif
 
 %install
@@ -237,7 +189,6 @@ install usr/bin/nvidia-{settings,xconfig,bug-report.sh} $RPM_BUILD_ROOT%{_bindir
 install usr/share/man/man1/nvidia-{settings,xconfig}.* $RPM_BUILD_ROOT%{_mandir}/man1
 install usr/share/applications/nvidia-settings.desktop $RPM_BUILD_ROOT%{_desktopdir}
 install usr/share/pixmaps/nvidia-settings.png $RPM_BUILD_ROOT%{_pixmapsdir}
-install %{SOURCE2} $RPM_BUILD_ROOT/etc/X11/xinit/xinitrc.d/nvidia-settings.sh
 
 for f in \
         usr/lib/tls/libnvidia-tls.so.%{version}         \
@@ -272,14 +223,7 @@ ln -sf %{_libdir}/libGL.so.1 $RPM_BUILD_ROOT/usr/%{_lib}/libGL.so
 %endif
 
 %if %{with kernel}
-cd usr/src/nv/
-install -d $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}{,smp}/misc
-install nvidia-%{?with_dist_kernel:up}%{!?with_dist_kernel:nondist}.ko \
-        $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}/misc/nvidia.ko
-%if %{with smp} && %{with dist_kernel}
-install nvidia-smp.ko \
-        $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}smp/misc/nvidia.ko
-%endif
+%install_kernel_modules -m usr/src/nv/nvidia -d misc
 %endif
 
 %clean
@@ -293,7 +237,7 @@ cat << EOF
  *                                                     *
  *  NOTE:                                              *
  *  You must install:                                  *
- *  kernel(24)(-smp)-video-nvidia-%{version}             *
+ *  kernel(24)-video-nvidia-%{version}                 *
  *  for this driver to work                            *
  *                                                     *
  *******************************************************
@@ -307,12 +251,6 @@ EOF
 
 %postun	-n kernel%{_alt_kernel}-video-nvidia
 %depmod %{_kernel_ver}
-
-%post	-n kernel%{_alt_kernel}-smp-video-nvidia
-%depmod %{_kernel_ver}smp
-
-%postun	-n kernel%{_alt_kernel}-smp-video-nvidia
-%depmod %{_kernel_ver}smp
 
 %if %{with userspace}
 %files
@@ -337,12 +275,6 @@ EOF
 %files -n kernel%{_alt_kernel}-video-nvidia
 %defattr(644,root,root,755)
 /lib/modules/%{_kernel_ver}/misc/*.ko*
-
-%if %{with smp} && %{with dist_kernel}
-%files -n kernel%{_alt_kernel}-smp-video-nvidia
-%defattr(644,root,root,755)
-/lib/modules/%{_kernel_ver}smp/misc/*.ko*
-%endif
 %endif
 
 %if %{with userspace}
@@ -358,7 +290,6 @@ EOF
 %attr(755,root,root) %{_bindir}/nvidia-settings
 %attr(755,root,root) %{_bindir}/nvidia-xconfig
 %attr(755,root,root) %{_bindir}/nvidia-bug-report.sh
-%attr(755,root,root) /etc/X11/xinit/xinitrc.d/*.sh
 %{_desktopdir}/nvidia-settings.desktop
 %{_mandir}/man1/nvidia-*
 %{_pixmapsdir}/nvidia-settings.png
