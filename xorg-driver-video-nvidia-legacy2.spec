@@ -61,7 +61,7 @@ Provides:	XFree86-OpenGL-core
 Provides:	XFree86-OpenGL-libGL
 Provides:	xorg-xserver-modules-libglx
 Obsoletes:	Mesa
-Obsoletes:      Mesa-libGL
+Obsoletes:	Mesa-libGL
 Obsoletes:	X11-OpenGL-core
 Obsoletes:	X11-OpenGL-libGL
 Obsoletes:	XFree86-OpenGL-core
@@ -82,21 +82,17 @@ support for most flat panels, and 2D multiple monitor support.
 This driver works with nVidia graphics which requres never drivers
 than legacy but doesn't work with fresh ones.
 
-Supported card are:
+Supported card are: 
 GeForce 6100/6150/6150LE/6200/6200TurboCache(TM)/6500/6600/6600GT/6600LE/6600VE/6610XL/6800/6800GS/6800GT/6800LE/6800Ultra/6800XE/6800XT/7300GS/7300LE/7600GS/7600GT/7800GS/7800GT/7800GTX/7900GT/7900GTX
 GeForce FX 5100/5200/5200LE/5500/5600/5600XT/5700/5700LE/5700VE/5800/5900/5900XT/5900ZT/5950/Go5100/Go5200/Go5250/Go53xx/Go5600/Go5650/Go5700
-GeForce Go 6200/6400/6600/6800/7300/7400/7600/7800/7900
-GeForce PCX 4300/5750/5900
-GeForce2 Go/Integrated GPU/MX(100/200/400)
-GeForce3/GeForce3 Ti(200/500)
-GeForce4 410Go/420Go/4200Go/440Go/460Go
-GeForce4 MX 4000/420/440/440SE/440-SE/460/Integrated
-GeForce4 Ti 4200/4400/4600/4800
-Quadro DCC
+GeForce Go 6200/6400/6600/6800/7300/7400/7600/7800/7900 
+GeForce PCX 4300/5750/5900 GeForce2 Go/Integrated GPU/MX(100/200/400)
+GeForce3/GeForce3 Ti(200/500) GeForce4 410Go/420Go/4200Go/440Go/460Go
+GeForce4 MX 4000/420/440/440SE/440-SE/460/Integrated 
+GeForce4 Ti 4200/4400/4600/4800 
+Quadro DCC 
 Quadro FX 1000/1100/1300/1400/1500/1500M/2000/2500M/3000/330/3400/4400/3450/350/3500/350M/4000/4500/500/600/540/550/5500/560/700/Go1000/Go1400/Go700
-Quadro NVS 110M/120M/280/285/440/50
-Quadro NVSA
-Quadro2 MXR/EX/Go
+Quadro NVS 110M/120M/280/285/440/50 Quadro NVSA Quadro2 MXR/EX/Go
 Quadro4 380XGL/500GoGL/550XGL/580XGL/700GoGL/700XGL/750XGL/780XGL/900XGL/980XGL
 
 %description -l pl
@@ -104,29 +100,24 @@ Usprawnione sterowniki dla kart graficznych nVidia do serwera
 Xorg/XFree86, daj±ce wysokowydajn± akceleracjê OpenGL, obs³ugê AGP i
 wielu monitorów 2D.
 
-Sterowniki obs³uguj± karty, które wymagaj± sterowników nowszych ni¿
-w pakiecie legacy, a nie s± obs³ugiwane przez najnowsze sterowniki.
+Sterowniki obs³uguj± karty, które wymagaj± sterowników nowszych ni¿ w
+pakiecie legacy, a nie s± obs³ugiwane przez najnowsze sterowniki.
 
 Obs³uguj± karty nVidia: 
 GeForce 6100/6150/6150LE/6200/6200TurboCache(TM)/6500/6600/6600GT/6600LE/6600VE/6610XL/6800/6800GS/6800GT/6800LE/6800Ultra/6800XE/6800XT/7300GS/7300LE/7600GS/7600GT/7800GS/7800GT/7800GTX/7900GT/7900GTX
 GeForce FX 5100/5200/5200LE/5500/5600/5600XT/5700/5700LE/5700VE/5800/5900/5900XT/5900ZT/5950/Go5100/Go5200/Go5250/Go53xx/Go5600/Go5650/Go5700
-GeForce Go 6200/6400/6600/6800/7300/7400/7600/7800/7900
-GeForce PCX 4300/5750/5900
-GeForce2 Go/Integrated GPU/MX(100/200/400)
-GeForce3/GeForce3 Ti(200/500)
-GeForce4 410Go/420Go/4200Go/440Go/460Go
-GeForce4 MX 4000/420/440/440SE/440-SE/460/Integrated
-GeForce4 Ti 4200/4400/4600/4800
-Quadro DCC
+GeForce Go 6200/6400/6600/6800/7300/7400/7600/7800/7900 
+GeForce PCX 4300/5750/5900 GeForce2 Go/Integrated GPU/MX(100/200/400)
+GeForce3/GeForce3 Ti(200/500) GeForce4 410Go/420Go/4200Go/440Go/460Go
+GeForce4 MX 4000/420/440/440SE/440-SE/460/Integrated 
+GeForce4 Ti 4200/4400/4600/4800 
+Quadro DCC 
 Quadro FX 1000/1100/1300/1400/1500/1500M/2000/2500M/3000/330/3400/4400/3450/350/3500/350M/4000/4500/500/600/540/550/5500/560/700/Go1000/Go1400/Go700
-Quadro NVS 110M/120M/280/285/440/50
-Quadro NVSA
-Quadro2 MXR/EX/Go
+Quadro NVS 110M/120M/280/285/440/50 Quadro NVSA Quadro2 MXR/EX/Go
 Quadro4 380XGL/500GoGL/550XGL/580XGL/700GoGL/700XGL/750XGL/780XGL/900XGL/980XGL
 
-Karty nVidia NV1 i Riva 128/128ZX s± obs³ugiwane przez
-sterownik nv z pakietów Xorg/XFree8 - NIE s± obs³ugiwane przez ten
-pakiet.
+Karty nVidia NV1 i Riva 128/128ZX s± obs³ugiwane przez sterownik nv z
+pakietów Xorg/XFree8 - NIE s± obs³ugiwane przez ten pakiet.
 
 %package devel
 Summary:	OpenGL for X11R6 development (only gl?.h)
@@ -250,8 +241,8 @@ ln -sf libXvMCNVIDIA.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libXvMCNVIDIA_dynam
 
 # OpenGL ABI for Linux compatibility
 ln -sf libGL.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libGL.so.1
-ln -sf %{_libdir}/libGL.so.1 $RPM_BUILD_ROOT/usr/%{_lib}/libGL.so.1
-ln -sf %{_libdir}/libGL.so.1 $RPM_BUILD_ROOT/usr/%{_lib}/libGL.so
+ln -sf %{_libdir}/libGL.so.1 $RPM_BUILD_ROOT%{_prefix}/%{_lib}/libGL.so.1
+ln -sf %{_libdir}/libGL.so.1 $RPM_BUILD_ROOT%{_prefix}/%{_lib}/libGL.so
 
 %endif
 
