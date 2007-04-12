@@ -11,7 +11,7 @@
 %define		_nv_ver		1.0
 %define		_nv_rel		9631
 %define		_min_x11	6.7.0
-%define		_rel		1
+%define		_rel		2
 #
 %define		need_x86	0
 %define		need_x8664	0
@@ -29,7 +29,7 @@
 #
 Summary:	Linux Drivers for older nVidia GeForce/Quadro Chips
 Summary(pl.UTF-8):	Sterowniki do starszych kart graficznych nVidia GeForce/Quadro
-Name:		xorg-driver-video-legacy2
+Name:		xorg-driver-video-nvidia-legacy2
 Version:	%{_nv_ver}.%{_nv_rel}
 Release:	%{_rel}
 License:	nVidia Binary
