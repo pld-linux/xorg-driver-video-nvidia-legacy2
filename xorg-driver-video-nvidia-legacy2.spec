@@ -52,7 +52,7 @@ BuildRequires:	%{kgcc_package}
 BuildRequires:	rpmbuild(macros) >= 1.379
 BuildConflicts:	XFree86-nvidia
 Requires:	xorg-xserver-server
-Provides:	OpenGL = 1.5
+Provides:	OpenGL = 2.1
 Provides:	OpenGL-GLX = 1.4
 Provides:	xorg-xserver-libglx
 Obsoletes:	Mesa
@@ -117,7 +117,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe OpenGL (GL i GLX)
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Provides:	OpenGL-GLX-devel = 1.4
-Provides:	OpenGL-devel = 1.5
+Provides:	OpenGL-devel = 2.1
 Obsoletes:	X11-OpenGL-devel-base
 Obsoletes:	XFree86-OpenGL-devel-base
 Obsoletes:	XFree86-driver-nvidia-devel
