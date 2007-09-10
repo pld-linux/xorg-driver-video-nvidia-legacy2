@@ -11,7 +11,7 @@
 %define		_nv_ver		1.0
 %define		_nv_rel		9639
 %define		_min_x11	6.7.0
-%define		_rel		2
+%define		_rel		3
 #
 %define		need_x86	0
 %define		need_x8664	0
@@ -52,6 +52,7 @@ BuildRequires:	%{kgcc_package}
 BuildRequires:	rpmbuild(macros) >= 1.379
 BuildConflicts:	XFree86-nvidia
 Requires:	xorg-xserver-server
+Requires:	xorg-xserver-server(videodrv-abi) = 1.2
 Provides:	OpenGL = 2.1
 Provides:	OpenGL-GLX = 1.4
 Provides:	xorg-xserver-libglx
