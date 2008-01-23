@@ -2,46 +2,29 @@
 # Conditional build:
 %bcond_without	dist_kernel	# without distribution kernel
 %bcond_without	kernel		# without kernel packages
-%bcond_without	incall		# include all tarballs
 %bcond_without	userspace	# don't build userspace programs
 %bcond_with	verbose		# verbose build (V=1)
-#
+
 %define		no_install_post_strip 1
-#
-%define		_nv_ver		96
-%define		_nv_rel		43.01
-%define		_min_x11	6.7.0
-#
-%define		need_x86	0
-%define		need_x8664	0
-%if %{with incall}
-%define		need_x86	1
-%define		need_x8664	1
-%else
-%ifarch %{ix86}
-%define		need_x86	1
-%endif
-%ifarch %{x8664}
-%define		need_x8664	1
-%endif
+
+%if "%{_alt_kernel}" != "%{nil}"
+%undefine	with_userspace
 %endif
 
+%define		pname		xorg-driver-video-nvidia-legacy2
 %define		rel		9
+
 Summary:	Linux Drivers for older nVidia GeForce/Quadro Chips
 Summary(pl.UTF-8):	Sterowniki do starszych kart graficznych nVidia GeForce/Quadro
-Name:		xorg-driver-video-nvidia-legacy2
-Version:	%{_nv_ver}.%{_nv_rel}
+Name:		%{pname}%{_alt_kernel}
+Version:	96.43.01
 Release:	%{rel}
 License:	nVidia Binary
 Group:		X11
-%if %{need_x86}
-Source0:	http://download.nvidia.com/XFree86/Linux-x86/%{_nv_ver}.%{_nv_rel}/NVIDIA-Linux-x86-%{_nv_ver}.%{_nv_rel}-pkg1.run
+Source0:	http://download.nvidia.com/XFree86/Linux-x86/%{version}/NVIDIA-Linux-x86-%{version}-pkg1.run
 # Source0-md5:	66f8b5e243aad22162e40d0f05f0bf1e
-%endif
-%if %{need_x8664}
-Source1:	http://download.nvidia.com/XFree86/Linux-x86_64/%{_nv_ver}.%{_nv_rel}/NVIDIA-Linux-x86_64-%{_nv_ver}.%{_nv_rel}-pkg2.run
+Source1:	http://download.nvidia.com/XFree86/Linux-x86_64/%{version}/NVIDIA-Linux-x86_64-%{version}-pkg2.run
 # Source1-md5:	a908a02dc58ddec526184dda18bf4ea5
-%endif
 Patch0:		X11-driver-nvidia-GL.patch
 Patch1:		X11-driver-nvidia-desktop.patch
 URL:		http://www.nvidia.com/object/unix.html
@@ -116,7 +99,7 @@ pakietu xorg-driver-video-nvidia-legacy.
 Summary:	OpenGL (GL and GLX) header files
 Summary(pl.UTF-8):	Pliki nagłówkowe OpenGL (GL i GLX)
 Group:		X11/Development/Libraries
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{pname} = %{version}-%{release}
 Provides:	OpenGL-GLX-devel = 1.4
 Provides:	OpenGL-devel = 2.1
 Obsoletes:	X11-OpenGL-devel-base
@@ -136,7 +119,7 @@ firmy NVIDIA.
 Summary:	Static XvMCNVIDIA library
 Summary(pl.UTF-8):	Statyczna biblioteka XvMCNVIDIA
 Group:		X11/Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{pname}-devel = %{version}-%{release}
 
 %description static
 Static XvMCNVIDIA library.
@@ -148,7 +131,7 @@ Statyczna biblioteka XvMCNVIDIA.
 Summary:	Tools for advanced control of nVidia graphic cards
 Summary(pl.UTF-8):	Narzędzia do zarządzania kartami graficznymi nVidia
 Group:		Applications/System
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{pname} = %{version}-%{release}
 Obsoletes:	XFree86-driver-nvidia-progs
 
 %description progs
@@ -161,7 +144,7 @@ Narzędzia do zarządzania kartami graficznymi nVidia.
 Summary:	nVidia kernel module for nVidia Architecture support
 Summary(de.UTF-8):	Das nVidia-Kern-Modul für die nVidia-Architektur-Unterstützung
 Summary(pl.UTF-8):	Moduł jądra dla obsługi kart graficznych nVidia
-Version:	%{_nv_ver}.%{_nv_rel}
+Version:	%{version}
 Release:	%{rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 Requires(post,postun):	/sbin/depmod
@@ -182,13 +165,13 @@ sterownik nVidii dla Xorg/XFree86.
 
 %prep
 cd %{_builddir}
-rm -rf NVIDIA-Linux-x86*-%{_nv_ver}.%{_nv_rel}-pkg*
+rm -rf NVIDIA-Linux-x86*-%{version}-pkg*
 %ifarch %{ix86}
 /bin/sh %{SOURCE0} --extract-only
-%setup -qDT -n NVIDIA-Linux-x86-%{_nv_ver}.%{_nv_rel}-pkg1
+%setup -qDT -n NVIDIA-Linux-x86-%{version}-pkg1
 %else
 /bin/sh %{SOURCE1} --extract-only
-%setup -qDT -n NVIDIA-Linux-x86_64-%{_nv_ver}.%{_nv_rel}-pkg2
+%setup -qDT -n NVIDIA-Linux-x86_64-%{version}-pkg2
 %endif
 %patch0 -p1
 %patch1 -p1
