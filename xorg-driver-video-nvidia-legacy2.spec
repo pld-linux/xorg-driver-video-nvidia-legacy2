@@ -10,22 +10,21 @@
 %endif
 
 %define		pname		xorg-driver-video-nvidia-legacy2
-%define		rel		18
+%define		rel		1
 
 Summary:	Linux Drivers for older nVidia GeForce/Quadro Chips
 Summary(pl.UTF-8):	Sterowniki do starszych kart graficznych nVidia GeForce/Quadro
 Name:		%{pname}%{_alt_kernel}
-Version:	96.43.05
+Version:	96.43.07
 Release:	%{rel}
 License:	nVidia Binary
 Group:		X11
-Source0:	http://download.nvidia.com/XFree86/Linux-x86/%{version}/NVIDIA-Linux-x86-%{version}-pkg1.run
-# Source0-md5:	addf2d2187e94885f1d5e7b6907202ff
-Source1:	http://download.nvidia.com/XFree86/Linux-x86_64/%{version}/NVIDIA-Linux-x86_64-%{version}-pkg2.run
-# Source1-md5:	5285d2b3205e0e571dc1fff668c89e06
+Source0:	http://us.download.nvidia.com/XFree86/Linux-x86/%{version}/NVIDIA-Linux-x86-%{version}-pkg1.run
+# Source0-md5:	bce9f250b21cc024d8fcebc28ba06970
+Source1:	http://us.download.nvidia.com/XFree86/Linux-x86_64/%{version}/NVIDIA-Linux-x86_64-%{version}-pkg2.run
+# Source1-md5:	03d80ef9738846570d9714087f541622
 Patch0:		X11-driver-nvidia-GL.patch
 Patch1:		X11-driver-nvidia-desktop.patch
-Patch2:		NVIDIA_kernel-96.43.05-2290218.diff
 URL:		http://www.nvidia.com/object/unix.html
 BuildRequires:	%{kgcc_package}
 %if %{with kernel}
@@ -174,9 +173,6 @@ rm -rf NVIDIA-Linux-x86*-%{version}-pkg*
 %endif
 %patch0 -p1
 %patch1 -p1
-%if "%{_kernel_ver}" >= "2.6.25"
-%patch2 -p0
-%endif
 echo 'EXTRA_CFLAGS += -Wno-pointer-arith -Wno-sign-compare -Wno-unused' >> usr/src/nv/Makefile.kbuild
 
 %build
