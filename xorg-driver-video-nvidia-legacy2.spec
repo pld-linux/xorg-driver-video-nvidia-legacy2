@@ -10,19 +10,19 @@
 %endif
 
 %define		pname		xorg-driver-video-nvidia-legacy2
-%define		rel		9
+%define		rel		1
 
 Summary:	Linux Drivers for older nVidia GeForce/Quadro Chips
 Summary(pl.UTF-8):	Sterowniki do starszych kart graficznych nVidia GeForce/Quadro
 Name:		%{pname}%{_alt_kernel}
-Version:	96.43.07
+Version:	96.43.09
 Release:	%{rel}
 License:	nVidia Binary
 Group:		X11
-Source0:	http://us.download.nvidia.com/XFree86/Linux-x86/%{version}/NVIDIA-Linux-x86-%{version}-pkg1.run
-# Source0-md5:	bce9f250b21cc024d8fcebc28ba06970
-Source1:	http://us.download.nvidia.com/XFree86/Linux-x86_64/%{version}/NVIDIA-Linux-x86_64-%{version}-pkg2.run
-# Source1-md5:	03d80ef9738846570d9714087f541622
+Source0:	ftp://download.nvidia.com/XFree86/Linux-x86/%{version}/NVIDIA-Linux-x86-%{version}-pkg0.run
+# Source0-md5:	758c739114b81ea2cb7da7c22ab80a7e
+Source1:	ftp://download.nvidia.com/XFree86/Linux-x86_64/%{version}/NVIDIA-Linux-x86_64-%{version}-pkg1.run
+# Source1-md5:	5998149fcc7917e595291e8d6c0810af
 Patch0:		X11-driver-nvidia-GL.patch
 Patch1:		X11-driver-nvidia-desktop.patch
 URL:		http://www.nvidia.com/object/unix.html
@@ -34,7 +34,7 @@ BuildRequires:	rpmbuild(macros) >= 1.379
 BuildConflicts:	XFree86-nvidia
 Requires:	xorg-xserver-server
 Requires:	xorg-xserver-server(videodrv-abi) >= 2.0
-Requires:	xorg-xserver-server(videodrv-abi) < 3.0
+Requires:	xorg-xserver-server(videodrv-abi) < 4.0
 Provides:	OpenGL = 2.1
 Provides:	OpenGL-GLX = 1.4
 Provides:	xorg-xserver-libglx
@@ -167,10 +167,10 @@ cd %{_builddir}
 rm -rf NVIDIA-Linux-x86*-%{version}-pkg*
 %ifarch %{ix86}
 /bin/sh %{SOURCE0} --extract-only
-%setup -qDT -n NVIDIA-Linux-x86-%{version}-pkg1
+%setup -qDT -n NVIDIA-Linux-x86-%{version}-pkg0
 %else
 /bin/sh %{SOURCE1} --extract-only
-%setup -qDT -n NVIDIA-Linux-x86_64-%{version}-pkg2
+%setup -qDT -n NVIDIA-Linux-x86_64-%{version}-pkg1
 %endif
 %patch0 -p1
 %patch1 -p1
