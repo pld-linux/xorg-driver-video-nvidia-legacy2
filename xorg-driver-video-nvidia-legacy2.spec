@@ -21,8 +21,8 @@ License:	nVidia Binary
 Group:		X11
 Source0:	ftp://download.nvidia.com/XFree86/Linux-x86/%{version}/NVIDIA-Linux-x86-%{version}-pkg0.run
 # Source0-md5:	758c739114b81ea2cb7da7c22ab80a7e
-Source1:	ftp://download.nvidia.com/XFree86/Linux-x86_64/%{version}/NVIDIA-Linux-x86_64-%{version}-pkg1.run
-# Source1-md5:	5998149fcc7917e595291e8d6c0810af
+Source1:	ftp://download.nvidia.com/XFree86/Linux-x86_64/%{version}/NVIDIA-Linux-x86_64-%{version}-pkg0.run
+# Source1-md5:	00a4cd93adc956f8cf173ab1036a5bf7
 Patch0:		X11-driver-nvidia-GL.patch
 Patch1:		X11-driver-nvidia-desktop.patch
 URL:		http://www.nvidia.com/object/unix.html
@@ -170,7 +170,7 @@ rm -rf NVIDIA-Linux-x86*-%{version}-pkg*
 %setup -qDT -n NVIDIA-Linux-x86-%{version}-pkg0
 %else
 /bin/sh %{SOURCE1} --extract-only
-%setup -qDT -n NVIDIA-Linux-x86_64-%{version}-pkg1
+%setup -qDT -n NVIDIA-Linux-x86_64-%{version}-pkg0
 %endif
 %patch0 -p1
 %patch1 -p1
