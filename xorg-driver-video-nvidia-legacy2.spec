@@ -51,6 +51,7 @@ ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _noautoreqdep   libGL.so.1 libGLcore.so.1
+%define		_enable_debug_packages	0
 
 %description
 This driver set adds improved 2D functionality to the Xorg/XFree86 X
