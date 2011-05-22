@@ -1,3 +1,5 @@
+# TODO
+# - use name like: nvidia-71xx and nvidia-96xx, nvidia-173xx.
 #
 # Conditional build:
 %bcond_without	dist_kernel	# without distribution kernel
@@ -9,13 +11,13 @@
 %undefine	with_userspace
 %endif
 
-%define		pname		xorg-driver-video-nvidia-legacy2
-%define		rel		2
+%define		pname	xorg-driver-video-nvidia-legacy2
+%define		rel		1
 
 Summary:	Linux Drivers for older nVidia GeForce/Quadro Chips
 Summary(pl.UTF-8):	Sterowniki do starszych kart graficznych nVidia GeForce/Quadro
 Name:		%{pname}%{_alt_kernel}
-Version:	96.43.18
+Version:	96.43.19
 Release:	%{rel}
 License:	nVidia Binary
 Group:		X11
@@ -33,8 +35,8 @@ BuildRequires:	%{kgcc_package}
 BuildRequires:	rpmbuild(macros) >= 1.379
 BuildConflicts:	XFree86-nvidia
 Requires:	xorg-xserver-server
+Requires:	xorg-xserver-server(videodrv-abi) <= 8.0
 Requires:	xorg-xserver-server(videodrv-abi) >= 2.0
-Requires:	xorg-xserver-server(videodrv-abi) <= 6.0
 Provides:	OpenGL = 2.1
 Provides:	OpenGL-GLX = 1.4
 Provides:	xorg-xserver-module(glx)
@@ -58,15 +60,15 @@ This driver set adds improved 2D functionality to the Xorg/XFree86 X
 server as well as high performance OpenGL acceleration, AGP support,
 support for most flat panels, and 2D multiple monitor support.
 
-This driver version supports the following nVidia adapters: 
+This driver version supports the following nVidia adapters:
 GeForce 6100/6150/6150LE/6200/6200TurboCache(TM)/6500/6600/6600GT/6600LE/6600VE/6610XL/6800/6800GS/6800GT/6800LE/6800Ultra/6800XE/6800XT/7300GS/7300LE/7600GS/7600GT/7800GS/7800GT/7800GTX/7900GT/7900GTX
 GeForce FX 5100/5200/5200LE/5500/5600/5600XT/5700/5700LE/5700VE/5800/5900/5900XT/5900ZT/5950/Go5100/Go5200/Go5250/Go53xx/Go5600/Go5650/Go5700
-GeForce Go 6200/6400/6600/6800/7300/7400/7600/7800/7900 
+GeForce Go 6200/6400/6600/6800/7300/7400/7600/7800/7900
 GeForce PCX 4300/5750/5900 GeForce2 Go/Integrated GPU/MX(100/200/400)
 GeForce3/GeForce3 Ti(200/500) GeForce4 410Go/420Go/4200Go/440Go/460Go
-GeForce4 MX 4000/420/440/440SE/440-SE/460/Integrated 
-GeForce4 Ti 4200/4400/4600/4800 
-Quadro DCC 
+GeForce4 MX 4000/420/440/440SE/440-SE/460/Integrated
+GeForce4 Ti 4200/4400/4600/4800
+Quadro DCC
 Quadro FX 1000/1100/1300/1400/1500/1500M/2000/2500M/3000/330/3400/4400/3450/350/3500/350M/4000/4500/500/600/540/550/5500/560/700/Go1000/Go1400/Go700
 Quadro NVS 110M/120M/280/285/440/50 Quadro NVSA Quadro2 MXR/EX/Go
 Quadro4 380XGL/500GoGL/550XGL/580XGL/700GoGL/700XGL/750XGL/780XGL/900XGL/980XGL
@@ -79,15 +81,15 @@ Usprawnione sterowniki dla kart graficznych nVidia do serwera
 Xorg/XFree86, dające wysokowydajną akcelerację OpenGL, obsługę AGP i
 wielu monitorów 2D.
 
-Ta wersja sterowników obsługuje następujące karty nVidia: 
+Ta wersja sterowników obsługuje następujące karty nVidia:
 GeForce 6100/6150/6150LE/6200/6200TurboCache(TM)/6500/6600/6600GT/6600LE/6600VE/6610XL/6800/6800GS/6800GT/6800LE/6800Ultra/6800XE/6800XT/7300GS/7300LE/7600GS/7600GT/7800GS/7800GT/7800GTX/7900GT/7900GTX
 GeForce FX 5100/5200/5200LE/5500/5600/5600XT/5700/5700LE/5700VE/5800/5900/5900XT/5900ZT/5950/Go5100/Go5200/Go5250/Go53xx/Go5600/Go5650/Go5700
-GeForce Go 6200/6400/6600/6800/7300/7400/7600/7800/7900 
+GeForce Go 6200/6400/6600/6800/7300/7400/7600/7800/7900
 GeForce PCX 4300/5750/5900 GeForce2 Go/Integrated GPU/MX(100/200/400)
 GeForce3/GeForce3 Ti(200/500) GeForce4 410Go/420Go/4200Go/440Go/460Go
-GeForce4 MX 4000/420/440/440SE/440-SE/460/Integrated 
-GeForce4 Ti 4200/4400/4600/4800 
-Quadro DCC 
+GeForce4 MX 4000/420/440/440SE/440-SE/460/Integrated
+GeForce4 Ti 4200/4400/4600/4800
+Quadro DCC
 Quadro FX 1000/1100/1300/1400/1500/1500M/2000/2500M/3000/330/3400/4400/3450/350/3500/350M/4000/4500/500/600/540/550/5500/560/700/Go1000/Go1400/Go700
 Quadro NVS 110M/120M/280/285/440/50 Quadro NVSA Quadro2 MXR/EX/Go
 Quadro4 380XGL/500GoGL/550XGL/580XGL/700GoGL/700XGL/750XGL/780XGL/900XGL/980XGL
