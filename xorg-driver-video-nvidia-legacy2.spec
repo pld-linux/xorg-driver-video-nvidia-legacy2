@@ -11,9 +11,8 @@
 %undefine	with_userspace
 %endif
 
+%define		rel		2
 %define		pname	xorg-driver-video-nvidia-legacy2
-%define		rel		1
-
 Summary:	Linux Drivers for older nVidia GeForce/Quadro Chips
 Summary(pl.UTF-8):	Sterowniki do starszych kart graficznych nVidia GeForce/Quadro
 Name:		%{pname}%{_alt_kernel}
@@ -39,6 +38,7 @@ Requires:	xorg-xserver-server(videodrv-abi) <= 8.0
 Requires:	xorg-xserver-server(videodrv-abi) >= 2.0
 Provides:	OpenGL = 2.1
 Provides:	OpenGL-GLX = 1.4
+Provides:	xorg-driver-video
 Provides:	xorg-xserver-module(glx)
 Obsoletes:	Mesa
 Obsoletes:	X11-OpenGL-core < 1:7.0.0
