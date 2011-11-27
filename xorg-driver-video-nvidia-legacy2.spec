@@ -11,19 +11,19 @@
 %undefine	with_userspace
 %endif
 
-%define		rel		3
+%define		rel		1
 %define		pname	xorg-driver-video-nvidia-legacy2
 Summary:	Linux Drivers for older nVidia GeForce/Quadro Chips
 Summary(pl.UTF-8):	Sterowniki do starszych kart graficznych nVidia GeForce/Quadro
 Name:		%{pname}%{_alt_kernel}
-Version:	96.43.19
+Version:	96.43.20
 Release:	%{rel}
 License:	nVidia Binary
 Group:		X11
 Source0:	ftp://download.nvidia.com/XFree86/Linux-x86/%{version}/NVIDIA-Linux-x86-%{version}-pkg0.run
-# Source0-md5:	53e98129d885a1b004aabc42a989fa73
+# Source0-md5:	875cc011385ea26ab5edd54a9b65a003
 Source1:	ftp://download.nvidia.com/XFree86/Linux-x86_64/%{version}/NVIDIA-Linux-x86_64-%{version}-pkg0.run
-# Source1-md5:	7ff779e299b938b880baff6cd970ab51
+# Source1-md5:	df3c87005487bdf54a6c5b783ff373db
 Patch0:		X11-driver-nvidia-GL.patch
 Patch1:		X11-driver-nvidia-legacy-desktop.patch
 URL:		http://www.nvidia.com/object/unix.html
@@ -31,7 +31,7 @@ BuildRequires:	%{kgcc_package}
 %if %{with kernel}
 %{?with_dist_kernel:BuildRequires:	kernel%{_alt_kernel}-module-build >= 3:2.6.20.2}
 %endif
-BuildRequires:	rpmbuild(macros) >= 1.379
+BuildRequires:	rpmbuild(macros) >= 1.583
 BuildConflicts:	XFree86-nvidia
 Requires:	xorg-xserver-server
 Requires:	xorg-xserver-server(videodrv-abi) <= 8.0
@@ -52,8 +52,10 @@ Conflicts:	XFree86-OpenGL-devel <= 4.2.0-3
 ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define         _noautoreqdep   libGL.so.1 libGLcore.so.1
+%define		_noautoreqdep			libGL.so.1 libGLcore.so.1
 %define		_enable_debug_packages	0
+# we have no power to fix these linkage
+%define		skip_post_check_so		libXvMCNVIDIA.so.96.43.* libGL.so.96.43.* libGLcore.so.96.43.* libglx.so.96.43.*
 
 %description
 This driver set adds improved 2D functionality to the Xorg/XFree86 X
@@ -61,17 +63,28 @@ server as well as high performance OpenGL acceleration, AGP support,
 support for most flat panels, and 2D multiple monitor support.
 
 This driver version supports the following nVidia adapters:
-GeForce 6100/6150/6150LE/6200/6200TurboCache(TM)/6500/6600/6600GT/6600LE/6600VE/6610XL/6800/6800GS/6800GT/6800LE/6800Ultra/6800XE/6800XT/7300GS/7300LE/7600GS/7600GT/7800GS/7800GT/7800GTX/7900GT/7900GTX
-GeForce FX 5100/5200/5200LE/5500/5600/5600XT/5700/5700LE/5700VE/5800/5900/5900XT/5900ZT/5950/Go5100/Go5200/Go5250/Go53xx/Go5600/Go5650/Go5700
-GeForce Go 6200/6400/6600/6800/7300/7400/7600/7800/7900
-GeForce PCX 4300/5750/5900 GeForce2 Go/Integrated GPU/MX(100/200/400)
-GeForce3/GeForce3 Ti(200/500) GeForce4 410Go/420Go/4200Go/440Go/460Go
-GeForce4 MX 4000/420/440/440SE/440-SE/460/Integrated
-GeForce4 Ti 4200/4400/4600/4800
-Quadro DCC
-Quadro FX 1000/1100/1300/1400/1500/1500M/2000/2500M/3000/330/3400/4400/3450/350/3500/350M/4000/4500/500/600/540/550/5500/560/700/Go1000/Go1400/Go700
-Quadro NVS 110M/120M/280/285/440/50 Quadro NVSA Quadro2 MXR/EX/Go
-Quadro4 380XGL/500GoGL/550XGL/580XGL/700GoGL/700XGL/750XGL/780XGL/900XGL/980XGL
+- GeForce 6100/6150/6150LE/6200/6200TurboCache(TM)/6500/6600/6600GT
+  6600LE/6600VE/6610XL/6800/6800GS/6800GT/6800LE/6800Ultra/6800XE
+  6800XT/7300GS/7300LE/7600GS/7600GT/7800GS/7800GT/7800GTX/7900GT
+  7900GTX
+- GeForce FX
+  5100/5200/5200LE/5500/5600/5600XT/5700/5700LE/5700VE/5800/5900
+  5900XT/5900ZT/5950/Go5100/Go5200/Go5250/Go53xx/Go5600/Go5650/Go5700
+- GeForce Go 6200/6400/6600/6800/7300/7400/7600/7800/7900
+- GeForce PCX 4300/5750/5900 GeForce2 Go/Integrated
+  GPU/MX(100/200/400)
+- GeForce3/GeForce3 Ti(200/500) GeForce4
+  410Go/420Go/4200Go/440Go/460Go
+- GeForce4 MX 4000/420/440/440SE/440-SE/460/Integrated
+- GeForce4 Ti 4200/4400/4600/4800
+- Quadro DCC
+- Quadro FX
+  1000/1100/1300/1400/1500/1500M/2000/2500M/3000/330/3400/4400/3450
+  350/3500/350M/4000/4500/500/600/540/550/5500/560/700/Go1000
+  Go1400/Go700
+- Quadro NVS 110M/120M/280/285/440/50 Quadro NVSA Quadro2 MXR/EX/Go
+- Quadro4
+  380XGL/500GoGL/550XGL/580XGL/700GoGL/700XGL/750XGL/780XGL/900XGL/980XGL
 
 Older TNT/GeForce/Quadro adapters are supported by driver from
 xorg-driver-video-nvidia-legacy package, not this one.
@@ -82,17 +95,28 @@ Xorg/XFree86, dające wysokowydajną akcelerację OpenGL, obsługę AGP i
 wielu monitorów 2D.
 
 Ta wersja sterowników obsługuje następujące karty nVidia:
-GeForce 6100/6150/6150LE/6200/6200TurboCache(TM)/6500/6600/6600GT/6600LE/6600VE/6610XL/6800/6800GS/6800GT/6800LE/6800Ultra/6800XE/6800XT/7300GS/7300LE/7600GS/7600GT/7800GS/7800GT/7800GTX/7900GT/7900GTX
-GeForce FX 5100/5200/5200LE/5500/5600/5600XT/5700/5700LE/5700VE/5800/5900/5900XT/5900ZT/5950/Go5100/Go5200/Go5250/Go53xx/Go5600/Go5650/Go5700
-GeForce Go 6200/6400/6600/6800/7300/7400/7600/7800/7900
-GeForce PCX 4300/5750/5900 GeForce2 Go/Integrated GPU/MX(100/200/400)
-GeForce3/GeForce3 Ti(200/500) GeForce4 410Go/420Go/4200Go/440Go/460Go
-GeForce4 MX 4000/420/440/440SE/440-SE/460/Integrated
-GeForce4 Ti 4200/4400/4600/4800
-Quadro DCC
-Quadro FX 1000/1100/1300/1400/1500/1500M/2000/2500M/3000/330/3400/4400/3450/350/3500/350M/4000/4500/500/600/540/550/5500/560/700/Go1000/Go1400/Go700
-Quadro NVS 110M/120M/280/285/440/50 Quadro NVSA Quadro2 MXR/EX/Go
-Quadro4 380XGL/500GoGL/550XGL/580XGL/700GoGL/700XGL/750XGL/780XGL/900XGL/980XGL
+- GeForce
+  6100/6150/6150LE/6200/6200TurboCache(TM)/6500/6600/6600GT/6600LE
+  6600VE/6610XL/6800/6800GS/6800GT/6800LE/6800Ultra/6800XE/6800XT
+  7300GS/7300LE/7600GS/7600GT/7800GS/7800GT/7800GTX/7900GT/7900GTX
+- GeForce FX
+  5100/5200/5200LE/5500/5600/5600XT/5700/5700LE/5700VE/5800/5900
+  5900XT/5900ZT/5950/Go5100/Go5200/Go5250/Go53xx/Go5600/Go5650/Go5700
+- GeForce Go 6200/6400/6600/6800/7300/7400/7600/7800/7900
+- GeForce PCX 4300/5750/5900 GeForce2 Go/Integrated
+  GPU/MX(100/200/400)
+- GeForce3/GeForce3 Ti(200/500) GeForce4
+  410Go/420Go/4200Go/440Go/460Go
+- GeForce4 MX 4000/420/440/440SE/440-SE/460/Integrated
+- GeForce4 Ti 4200/4400/4600/4800
+- Quadro DCC
+- Quadro FX
+  1000/1100/1300/1400/1500/1500M/2000/2500M/3000/330/3400/4400/3450
+  350/3500/350M/4000/4500/500/600/540/550/5500/560/700/Go1000
+  Go1400/Go700
+- Quadro NVS 110M/120M/280/285/440/50 Quadro NVSA Quadro2 MXR/EX/Go
+- Quadro4 380XGL/500GoGL/550XGL/580XGL/700GoGL/700XGL/750XGL/780XGL
+  900XGL/980XGL
 
 Starsze karty TNT/GeForce/Quadro są obsługiwane przez sterownik z
 pakietu xorg-driver-video-nvidia-legacy.
@@ -180,7 +204,7 @@ echo 'EXTRA_CFLAGS += -Wno-pointer-arith -Wno-sign-compare -Wno-unused' >> usr/s
 
 %build
 %if %{with kernel}
-cd usr/src/nv/
+cd usr/src/nv
 ln -sf Makefile.kbuild Makefile
 cat >> Makefile <<'EOF'
 
@@ -199,27 +223,27 @@ install -d $RPM_BUILD_ROOT%{_libdir}/xorg/modules/{drivers,extensions} \
         $RPM_BUILD_ROOT{%{_includedir}/GL,%{_libdir},%{_bindir},%{_mandir}/man1} \
         $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},/etc/X11/xinit/xinitrc.d}
 
-install usr/bin/nvidia-{settings,xconfig,bug-report.sh} $RPM_BUILD_ROOT%{_bindir}
-install usr/share/man/man1/nvidia-{settings,xconfig}.* $RPM_BUILD_ROOT%{_mandir}/man1
-install usr/share/applications/nvidia-settings.desktop $RPM_BUILD_ROOT%{_desktopdir}
-install usr/share/pixmaps/nvidia-settings.png $RPM_BUILD_ROOT%{_pixmapsdir}
+install -p usr/bin/nvidia-{settings,xconfig,bug-report.sh} $RPM_BUILD_ROOT%{_bindir}
+cp -p usr/share/man/man1/nvidia-{settings,xconfig}.* $RPM_BUILD_ROOT%{_mandir}/man1
+cp -p usr/share/applications/nvidia-settings.desktop $RPM_BUILD_ROOT%{_desktopdir}
+cp -p usr/share/pixmaps/nvidia-settings.png $RPM_BUILD_ROOT%{_pixmapsdir}
 
 for f in \
-        usr/lib/tls/libnvidia-tls.so.%{version}         \
-        usr/lib/libnvidia-cfg.so.%{version}             \
-        usr/lib/libGL{,core}.so.%{version}              \
-        usr/X11R6/lib/libXvMCNVIDIA.so.%{version}       \
-        usr/X11R6/lib/libXvMCNVIDIA.a                   \
+	usr/lib/tls/libnvidia-tls.so.%{version}         \
+	usr/lib/libnvidia-cfg.so.%{version}             \
+	usr/lib/libGL{,core}.so.%{version}              \
+	usr/X11R6/lib/libXvMCNVIDIA.so.%{version}       \
+	usr/X11R6/lib/libXvMCNVIDIA.a                   \
 ; do
-        install $f $RPM_BUILD_ROOT%{_libdir}
+	install -p $f $RPM_BUILD_ROOT%{_libdir}
 done
 
-install usr/X11R6/lib/modules/extensions/libglx.so.%{version} \
-        $RPM_BUILD_ROOT%{_libdir}/xorg/modules/extensions
-install usr/X11R6/lib/modules/drivers/nvidia_drv.so \
-        $RPM_BUILD_ROOT%{_libdir}/xorg/modules/drivers
+install -p usr/X11R6/lib/modules/extensions/libglx.so.%{version} \
+	$RPM_BUILD_ROOT%{_libdir}/xorg/modules/extensions
+install -p usr/X11R6/lib/modules/drivers/nvidia_drv.so \
+	$RPM_BUILD_ROOT%{_libdir}/xorg/modules/drivers
 
-install usr/include/GL/*.h $RPM_BUILD_ROOT%{_includedir}/GL
+cp -p usr/include/GL/*.h $RPM_BUILD_ROOT%{_includedir}/GL
 
 ln -sf libglx.so.%{version} $RPM_BUILD_ROOT%{_libdir}/xorg/modules/extensions/libglx.so
 ln -sf libXvMCNVIDIA.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libXvMCNVIDIA.so
@@ -239,10 +263,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/ldconfig
-cat << EOF
-NOTE: You must install:
-kernel-video-nvidia-legacy2-%{version}
-for this driver to work
+cat << 'EOF'
+NOTE: You must also install kernel module for this driver to work:
+  kernel-video-nvidia-legacy2-%{version}
 EOF
 
 %postun	-p /sbin/ldconfig
