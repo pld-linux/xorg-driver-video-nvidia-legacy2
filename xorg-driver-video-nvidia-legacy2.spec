@@ -16,14 +16,14 @@
 Summary:	Linux Drivers for older nVidia GeForce/Quadro Chips
 Summary(pl.UTF-8):	Sterowniki do starszych kart graficznych nVidia GeForce/Quadro
 Name:		%{pname}%{_alt_kernel}
-Version:	96.43.20
+Version:	96.43.23
 Release:	%{rel}
 License:	nVidia Binary
 Group:		X11
 Source0:	ftp://download.nvidia.com/XFree86/Linux-x86/%{version}/NVIDIA-Linux-x86-%{version}-pkg0.run
-# Source0-md5:	875cc011385ea26ab5edd54a9b65a003
+# Source0-md5:	ca0bc6ae3b37cb259f3a906b4dc4670b
 Source1:	ftp://download.nvidia.com/XFree86/Linux-x86_64/%{version}/NVIDIA-Linux-x86_64-%{version}-pkg0.run
-# Source1-md5:	df3c87005487bdf54a6c5b783ff373db
+# Source1-md5:	a043fe8dd639bd00b1792eea7a195677
 Patch0:		X11-driver-nvidia-GL.patch
 Patch1:		X11-driver-nvidia-legacy-desktop.patch
 URL:		http://www.nvidia.com/object/unix.html
