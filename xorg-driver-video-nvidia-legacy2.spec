@@ -265,7 +265,7 @@ rm -rf $RPM_BUILD_ROOT
 /sbin/ldconfig
 cat << 'EOF'
 NOTE: You must also install kernel module for this driver to work:
-  kernel-video-nvidia-legacy2-%{version}
+  kernel%{_alt_kernel}-video-nvidia-legacy2-%{version}
 EOF
 
 %postun	-p /sbin/ldconfig
