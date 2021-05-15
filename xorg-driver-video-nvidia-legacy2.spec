@@ -52,7 +52,6 @@ Conflicts:	XFree86-OpenGL-devel <= 4.2.0-3
 ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_noautoreqdep			libGL.so.1 libGLcore.so.1
 %define		_enable_debug_packages	0
 # we have no power to fix these linkage
 %define		skip_post_check_so		libXvMCNVIDIA.so.96.43.* libGL.so.96.43.* libGLcore.so.96.43.* libglx.so.96.43.*
