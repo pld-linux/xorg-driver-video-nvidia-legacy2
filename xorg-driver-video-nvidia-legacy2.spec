@@ -26,7 +26,7 @@ Source1:	ftp://download.nvidia.com/XFree86/Linux-x86_64/%{version}/NVIDIA-Linux-
 # Source1-md5:	a043fe8dd639bd00b1792eea7a195677
 Patch0:		X11-driver-nvidia-GL.patch
 Patch1:		X11-driver-nvidia-legacy-desktop.patch
-URL:		http://www.nvidia.com/object/unix.html
+URL:		https://www.nvidia.com/en-us/drivers/unix/
 BuildRequires:	%{kgcc_package}
 %if %{with kernel}
 %{?with_dist_kernel:BuildRequires:	kernel%{_alt_kernel}-module-build >= 3:2.6.20.2}
